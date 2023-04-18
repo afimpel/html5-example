@@ -19,6 +19,7 @@
 
     <script>
         const x = document.getElementById("demo");
+        const googleMaps = document.getElementById("googleMaps");
 
         function getLocation() {
             x.innerHTML = new Date();
@@ -61,7 +62,7 @@
                 position.coords.latitude +
                 "</b><br />Longitude: <b>" +
                 position.coords.longitude +"</b>";
-            document.getElementById('googleMaps').href = `https://www.google.com/maps?saddr=My+Location&daddr=${marker.lat},${marker.lng}&dirflg=d`;
+                googleMaps.href = `https://www.google.com/maps?saddr=My+Location&daddr=${marker.lat},${marker.lng}&dirflg=d`;
         }
     </script>
 </body>
