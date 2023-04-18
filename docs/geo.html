@@ -49,7 +49,7 @@
 
         function showPosition(position) {
             console.log('position', position);
-            x.innerHTML +=
+            x.innerHTML += JSON.stringify(position) +
                 "Latitude: <b>" +
                 position.coords.latitude +
                 "</b><br />Longitude: <b>" +
