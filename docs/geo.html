@@ -54,7 +54,6 @@
         }
 
         x.innerHTML = new Date();
-        getLocation();
 
         function showPosition(position) {
             x.innerHTML += "<em style='color: green;'>"+position.timestamp +
@@ -62,8 +61,10 @@
                 position.coords.latitude +
                 "</b><br />Longitude: <b>" +
                 position.coords.longitude +"</b>";
-                googleMaps.href = `https://www.google.com/maps?saddr=My+Location&daddr=${marker.lat},${marker.lng}&dirflg=d`;
+                googleMaps.href = `https://www.google.com/maps?saddr=My+Location&daddr=${position.coords.latitude},${position.coords.longitude}&dirflg=d`;
+                console.log('googleMaps :>> ', googleMaps);
         }
+        getLocation();
     </script>
 </body>
 
