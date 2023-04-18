@@ -37,6 +37,7 @@
                         } else {
                             x.innerHTML += "<br />La geolocalización está denegada.";
                         }
+                        x.innerHTML += "<hr />";
                     });
             } else {
                 x.innerHTML += "<br />El navegador no admite la API Permissions.";
@@ -48,7 +49,7 @@
 
         function showPosition(position) {
             console.log('position', position);
-            x.innerHTML =
+            x.innerHTML +=
                 "<br />Latitude: <b>" +
                 position.coords.latitude +
                 "</b><br />Longitude: <b>" +
