@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <body>
+
+<body  style="font-size: 24px">
     <h2>JavaScript Geolocation API</h2>
     <p>Click the button to get your coordinates.</p>
 
-    <button onclick="getLocation()">Try It</button>
+    <button style="font-size: 50px" onclick="getLocation()">Try It</button>
 
-    <p id="demo">33333</p>
+    <pre id="demo">33333</pre>
 
     <script>
-      const x = document.getElementById("demo");
+        const x = document.getElementById("demo");
 
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-          if (navigator.permissions) {
-            navigator.permissions
-              .query({
-                name: "geolocation",
-              })
-              .then((permission) => {
-                x.innerHTML += permission.state;
-                if (permission.state === "granted") {
-                  x.innerHTML += "La geolocalización está permitida.";
-                } else if (permission.state === "prompt") {
-                  x.innerHTML +=
-                    "El usuario debe otorgar permiso para la geolocalización.";
-                  navigator.geolocation.getCurrentPosition(showPosition);
-                } else {
-                  x.innerHTML += "La geolocalización está denegada.";
-                }
-              });
-          } else {
-            x.innerHTML += "El navegador no admite la API Permissions.";
-          }
+        function getLocation() {
+            x.innerHTML = new Date();
+            x.innerHTML += "<hr />";
+            if (navigator.geolocation) {
+                x.innerHTML += "navigator.geolocation";
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            x.innerHTML += "<hr />";
+            if (navigator.permissions) {
+                x.innerHTML += "navigator.permissions";
+                navigator.permissions
+                    .query({
+                        name: "geolocation",
+                    })
+                    .then((permission) => {
+                        x.innerHTML += "<br /><b>" + permission.state+"</b>";
+                        if (permission.state === "granted") {
+                            x.innerHTML += "<br />La geolocalización está permitida.";
+                        } else if (permission.state === "prompt") {
+                            x.innerHTML +=
+                                "El usuario debe otorgar permiso para la geolocalización.";
+                            navigator.geolocation.getCurrentPosition(showPosition);
+                        } else {
+                            x.innerHTML += "<br />La geolocalización está denegada.";
+                        }
+                    });
+            } else {
+                x.innerHTML += "<br />El navegador no admite la API Permissions.";
+            }
         }
-      }
-      x.innerHTML = navigator.geolocation;
-      getLocation();
 
-      function showPosition(position) {
-        x.innerHTML =
-          "Latitude: " +
-          position.coords.latitude +
-          "<br>Longitude: " +
-          position.coords.longitude;
-      }
+        x.innerHTML = new Date();
+        getLocation();
+
+        function showPosition(position) {
+            console.log('position', position);
+            x.innerHTML =
+                "<br />Latitude: <b>" +
+                position.coords.latitude +
+                "</b><br />Longitude: <b>" +
+                position.coords.longitude +"</b>";
+        }
     </script>
-  </body>
+</body>
+
 </html>
