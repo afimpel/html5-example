@@ -5,10 +5,10 @@
 </head>
 
 <body style="font-size: 24px; text-align: center;">
-    <h1>JavaScript Geolocation API</h1>
-    <button style="font-size: 72px" onclick="getLocation()">Click</button>
+    <h1 style="border: 1px solid green; padding: 1rem;">JavaScript Geolocation API</h1>
+    <button style="font-size: 72px; color: green; padding: 1rem 6rem;" onclick="getLocation()">Click</button>
 
-    <pre id="demo">33333</pre>
+    <pre style="border: 1px solid green; padding: 1rem;" id="demo">33333</pre>
 
     <script>
         const x = document.getElementById("demo");
@@ -49,7 +49,7 @@
         getLocation();
 
         function showPosition(position) {
-            x.innerHTML += "<em>"+position.timestamp +
+            x.innerHTML += "<em style='color: green;'>"+position.timestamp +
                 "</em><br />Latitude: <b>" +
                 position.coords.latitude +
                 "</b><br />Longitude: <b>" +
