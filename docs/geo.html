@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>JavaScript Geolocation API</h2>
+    <p>Click the button to get your coordinates.</p>
+
+    <button onclick="getLocation()">Try It</button>
+
+    <p id="demo">33333</p>
+
+    <script>
+        const x = document.getElementById("demo");
+
+        function getLocation() {
+            if (navigator.permissions) {
+                navigator.permissions.query({
+                    name: 'geolocation'
+                }).then(permission => {
+                    x.innerHTML +=permission.state;
+                    if (permission.state === 'granted') {
+                        x.innerHTML += 'La geolocalización está permitida.';
+                    } else if (permission.state === 'prompt') {
+                        x.innerHTML += 'El usuario debe otorgar permiso para la geolocalización.';
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } else {
+                        x.innerHTML += 'La geolocalización está denegada.';
+                    }
+                });
+            } else {
+                x.innerHTML += 'El navegador no admite la API Permissions.';
+            }
+        }
+        x.innerHTML = window.navigator.geolocation;
+        getLocation();
+
+        function showPosition(position) {
+            x.innerHTML += "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+        }
+    </script>
+
+</body>
+
+</html>
