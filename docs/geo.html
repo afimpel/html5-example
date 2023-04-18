@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>JavaScript Geolocation API</title>
+</head>
 
-<body  style="font-size: 24px">
-    <h2>JavaScript Geolocation API</h2>
-    <p>Click the button to get your coordinates.</p>
-
-    <button style="font-size: 50px" onclick="getLocation()">Try It</button>
+<body style="font-size: 24px; text-align: center;">
+    <h1>JavaScript Geolocation API</h1>
+    <button style="font-size: 72px" onclick="getLocation()">Click</button>
 
     <pre id="demo">33333</pre>
 
@@ -48,9 +49,8 @@
         getLocation();
 
         function showPosition(position) {
-            console.log('position', position);
-            x.innerHTML += position.timestamp +
-                "<br />Latitude: <b>" +
+            x.innerHTML += "<em>"+position.timestamp +
+                "</em><br />Latitude: <b>" +
                 position.coords.latitude +
                 "</b><br />Longitude: <b>" +
                 position.coords.longitude +"</b>";
