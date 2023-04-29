@@ -2,7 +2,7 @@ const x = document.getElementById("alerts");
 const btn = document.getElementById("getLocation");
 const anchor = document.getElementById("links");
 const googleMaps = document.getElementById("googleMaps");
-const agents = document.getElementById("agent");
+const agents = document.getElementById("agents");
 const jsondatahtml = document.getElementById("jsondatahtml");
 
 const getData = async () => {
