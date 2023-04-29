@@ -59,9 +59,9 @@ function showPosition(position) {
     "<hr />" +
     "<em style='color: green;'>" +
     position.timestamp +
-    "</em><hr />Latitude: <b>" +
+    "</em><br />Latitude: <b>" +
     position.coords.latitude +
-    "</b><hr />Longitude: <b>" +
+    "</b><br />Longitude: <b>" +
     position.coords.longitude +
     "</b>";
   googleMaps.href = `https://www.google.com/maps?saddr=My+Location&daddr=${position.coords.latitude},${position.coords.longitude}&dirflg=d`;
