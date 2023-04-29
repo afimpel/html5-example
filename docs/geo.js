@@ -100,8 +100,12 @@ function getLocation() {
 }
 
 window.onload = function () {
+  console.log(
+    "window :>> ",
+    window.SecurityPolicyViolationEvent((e) => {
+      console.log("e :>> ", e);
+    })
+  );
   getLocation();
-  console.log('window :>> ', window.SecurityPolicyViolationEvent);
   btn.addEventListener("click", getLocation);
 };
-
