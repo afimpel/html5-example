@@ -50,6 +50,7 @@ const getData = async () => {
 const linkers = (links) => {
   anchor.href = links;
   jsondatahtml.innerHTML += "<br>" + links;
+  jsondatahtml.style.display = "";
   anchor.style.display = "";
   anchor.click();
 };
