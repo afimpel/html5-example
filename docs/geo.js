@@ -1,4 +1,4 @@
-const x = document.getElementById("alerts");
+const alerts = document.getElementById("alerts");
 const btn = document.getElementById("getLocation");
 const anchor = document.getElementById("links");
 const googleMaps = document.getElementById("googleMaps");
@@ -11,11 +11,10 @@ const getData = async () => {
       const position = await new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
       });
-      jsondatahtml.style.color = "green";
-      jsondatahtml.innerHTML = JSON.stringify(Object.entries(position));
+      jsondatahtml.style.display = "none";
       showPosition(position);
     } catch (error) {
-      x.innerHTML += "<br />" + "No se pudo obtener la ubicación actual";
+      alerts.innerHTML += "<br />" + "No se pudo obtener la ubicación actual";
       if (error.code === error.PERMISSION_DENIED) {
         if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
           linkers("App-Prefs:Privacy&path=LOCATION");
@@ -28,23 +27,23 @@ const getData = async () => {
         } else if (navigator.userAgent.match(/(Chrome)/)) {
           linkers("chrome://settings");
         }
-        x.innerHTML +=
+        alerts.innerHTML +=
           "<br />" +
           "Por favor habilite la <b>ubicación</b> en su dispositivo para utilizar esta función.";
       } else if (error.code === error.POSITION_UNAVAILABLE) {
-        x.innerHTML +=
+        alerts.innerHTML +=
           "<br />" +
           "Lo sentimos, no se puede acceder a su ubicación en este momento. Por favor, inténtelo más tarde.";
       } else {
-        x.innerHTML +=
+        alerts.innerHTML +=
           "<br />" +
           "Se produjo un error al intentar acceder a su ubicación. Por favor, inténtelo más tarde.";
       }
       jsondatahtml.style.color = "red";
-      jsondatahtml.innerHTML = JSON.stringify(Object.entries(error));
+      jsondatahtml.innerHTML = error.message;
     }
   } else {
-    x.innerHTML +=
+    alerts.innerHTML +=
       "<br />" + "La geolocalización no está soportada por este navegador";
   }
 };
@@ -55,7 +54,7 @@ const linkers = (links) => {
 };
 
 function showPosition(position) {
-  x.innerHTML +=
+  alerts.innerHTML +=
     "<br />" +
     "<em style='color: green;'>" +
     position.timestamp +
@@ -69,21 +68,21 @@ function showPosition(position) {
 
 function getLocation() {
   agents.innerHTML = navigator.userAgent;
-  x.innerHTML = "welcome.";
+  alerts.innerHTML = "welcome.";
   let navegadosss = true;
   if (navigator.geolocation) {
     navegadosss = false;
     getData();
   }
   if (navigator.permissions) {
-    x.innerHTML += "<br />" + "navigator.permissions";
+    alerts.innerHTML += "<br />" + "navigator.permissions";
     navigator.permissions
       .query({
         name: "geolocation",
       })
       .then((permission) => {
         if (permission.state === "granted") {
-          x.innerHTML += "<br />" + "La geolocalización está permitida.";
+          alerts.innerHTML += "<br />" + "La geolocalización está permitida.";
         } else if (permission.state === "prompt") {
           if (navegadosss) {
             getData();
@@ -92,10 +91,10 @@ function getLocation() {
       })
       .catch((error) => {
         jsondatahtml.style.color = "red";
-        jsondatahtml.innerHTML = JSON.stringify(Object.entries(error));
-      });
+        jsondatahtml.innerHTML = error.message;
+    });
   } else {
-    x.innerHTML += "<br />" + "El navegador no admite la API Permissions.";
+    alerts.innerHTML += "<br />" + "El navegador no admite la API Permissions.";
   }
 }
 
