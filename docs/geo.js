@@ -12,7 +12,7 @@ const getData = async () => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
       });
       jsondatahtml.style.color = "green";
-      jsondatahtml.innerHTML = JSON.stringify(position);
+      jsondatahtml.innerHTML = JSON.stringify(Object.entries(position));
       showPosition(position);
     } catch (error) {
       x.innerHTML += "<br />" + "No se pudo obtener la ubicación actual";
@@ -41,8 +41,7 @@ const getData = async () => {
           "Se produjo un error al intentar acceder a su ubicación. Por favor, inténtelo más tarde.";
       }
       jsondatahtml.style.color = "red";
-      jsondatahtml.innerHTML = JSON.stringify(error);
-
+      jsondatahtml.innerHTML = JSON.stringify(Object.entries(error));
     }
   } else {
     x.innerHTML +=
@@ -51,6 +50,7 @@ const getData = async () => {
 };
 const linkers = (links) => {
   anchor.href = links;
+  anchor.style.display = "";
   anchor.click();
 };
 
@@ -92,7 +92,7 @@ function getLocation() {
       })
       .catch((error) => {
         jsondatahtml.style.color = "red";
-        jsondatahtml.innerHTML = JSON.stringify(error);
+        jsondatahtml.innerHTML = JSON.stringify(Object.entries(error));
       });
   } else {
     x.innerHTML += "<br />" + "El navegador no admite la API Permissions.";
