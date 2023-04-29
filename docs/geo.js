@@ -18,12 +18,10 @@ const getData = async () => {
       if (error.code === error.PERMISSION_DENIED) {
         if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
           linkers("App-Prefs:Privacy&path=LOCATION");
-        } else if (navigator.userAgent.indexOf("Android 10") != -1) {
+        } else if (navigator.userAgent.match(/(Android)/)) {
           linkers(
             "intent://settings/#Intent;scheme=android-settings;package=com.android.settings;end"
           );
-        } else if (navigator.userAgent.match(/(Android)/)) {
-          linkers("location-settings://");
         } else if (navigator.userAgent.match(/(Chrome)/)) {
           linkers("chrome://settings");
         }
