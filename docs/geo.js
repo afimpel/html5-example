@@ -101,13 +101,6 @@ function getLocation() {
 
 window.onload = function () {
   getLocation();
-  if (window.SecurityPolicy && window.SecurityPolicy.permitPolicy) {
-    document
-      .querySelector("meta[http-equiv='Content-Security-Policy']")
-      .setAttribute(
-        "content",
-        "default-src 'self'; script-src 'self' 'unsafe-inline'; permissions-policy interest-cohort=(self)"
-      );
-  }
   btn.addEventListener("click", getLocation);
 };
+
