@@ -24,7 +24,7 @@ const getData = async () => {
             "intent://settings/#Intent;scheme=android-settings;package=com.android.settings;end"
           );
         } else if (navigator.userAgent.match(/(Chrome)/)) {
-          linkers("chrome://settings");
+          linkers("chrome://settings/content");
         }
         alerts.innerHTML +=
           "<hr />" +
