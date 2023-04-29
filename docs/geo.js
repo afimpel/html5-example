@@ -18,7 +18,7 @@ const getData = async () => {
       if (error.code === error.PERMISSION_DENIED) {
         if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
           linkers("App-Prefs:Privacy&path=LOCATION");
-        } else if (navigator.userAgent.indexOf("Android 12") != -1) {
+        } else if (navigator.userAgent.indexOf("Android 10") != -1) {
           linkers(
             "intent://#Intent;action=android.settings.LOCATION_SOURCE_SETTINGS;category=android.intent.category.DEFAULT;category=android.intent.category.VOICE_LAUNCH;end"
           );
