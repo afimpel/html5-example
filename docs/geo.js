@@ -69,7 +69,7 @@ function showPosition(position) {
 
 function getLocation() {
   agents.innerHTML = navigator.userAgent;
-  alerts.innerHTML = "welcome.";
+  alerts.innerHTML = new Date();
   let navegadosss = true;
   if (navigator.geolocation) {
     navegadosss = false;
