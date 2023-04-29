@@ -49,6 +49,7 @@ const getData = async () => {
 };
 const linkers = (links) => {
   anchor.href = links;
+  jsondatahtml.innerHTML += "<br>" + links;
   anchor.style.display = "";
   anchor.click();
 };
@@ -92,7 +93,7 @@ function getLocation() {
       .catch((error) => {
         jsondatahtml.style.color = "red";
         jsondatahtml.innerHTML = error.message;
-    });
+      });
   } else {
     alerts.innerHTML += "<br />" + "El navegador no admite la API Permissions.";
   }
