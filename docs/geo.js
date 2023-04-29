@@ -20,7 +20,7 @@ const getData = async () => {
           linkers("App-Prefs:Privacy&path=LOCATION");
         } else if (navigator.userAgent.indexOf("Android 10") != -1) {
           linkers(
-            "intent://#Intent;action=android.settings.LOCATION_SOURCE_SETTINGS;category=android.intent.category.DEFAULT;category=android.intent.category.VOICE_LAUNCH;end"
+            "intent://settings/#Intent;scheme=android-settings;package=com.android.settings;end"
           );
         } else if (navigator.userAgent.match(/(Android)/)) {
           linkers("location-settings://");
@@ -40,7 +40,7 @@ const getData = async () => {
           "Se produjo un error al intentar acceder a su ubicación. Por favor, inténtelo más tarde.";
       }
       jsondatahtml.style.color = "red";
-      jsondatahtml.innerHTML = error.message;
+      jsondatahtml.innerHTML += "<br>" + error.message;
     }
   } else {
     alerts.innerHTML +=
@@ -93,7 +93,7 @@ function getLocation() {
       })
       .catch((error) => {
         jsondatahtml.style.color = "red";
-        jsondatahtml.innerHTML = error.message;
+        jsondatahtml.innerHTML += "<br>" + error.message;
       });
   } else {
     alerts.innerHTML += "<br />" + "El navegador no admite la API Permissions.";
