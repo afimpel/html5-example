@@ -101,6 +101,7 @@ function getLocation() {
 
 window.onload = function () {
   getLocation();
+  console.log('window :>> ', window.SecurityPolicy);
   btn.addEventListener("click", getLocation);
 };
 
