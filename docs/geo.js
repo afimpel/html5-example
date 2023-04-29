@@ -6,6 +6,7 @@ const agents = document.getElementById("agents");
 const jsondatahtml = document.getElementById("jsondatahtml");
 
 const getData = async () => {
+  jsondatahtml.innerHTML = new Date();
   if (navigator.geolocation) {
     try {
       const position = await new Promise((resolve, reject) => {
@@ -14,7 +15,7 @@ const getData = async () => {
       jsondatahtml.style.display = "none";
       showPosition(position);
     } catch (error) {
-      alerts.innerHTML += "<br />" + "No se pudo obtener la ubicación actual";
+      alerts.innerHTML += "<hr />" + "No se pudo obtener la ubicación actual";
       if (error.code === error.PERMISSION_DENIED) {
         if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
           linkers("App-Prefs:Privacy&path=LOCATION");
@@ -26,28 +27,28 @@ const getData = async () => {
           linkers("chrome://settings");
         }
         alerts.innerHTML +=
-          "<br />" +
+          "<hr />" +
           "Por favor habilite la <b>ubicación</b> en su dispositivo para utilizar esta función.";
       } else if (error.code === error.POSITION_UNAVAILABLE) {
         alerts.innerHTML +=
-          "<br />" +
+          "<hr />" +
           "Lo sentimos, no se puede acceder a su ubicación en este momento. Por favor, inténtelo más tarde.";
       } else {
         alerts.innerHTML +=
-          "<br />" +
+          "<hr />" +
           "Se produjo un error al intentar acceder a su ubicación. Por favor, inténtelo más tarde.";
       }
       jsondatahtml.style.color = "red";
-      jsondatahtml.innerHTML += "<br>" + error.message;
+      jsondatahtml.innerHTML += "<hr />" + error.message;
     }
   } else {
     alerts.innerHTML +=
-      "<br />" + "La geolocalización no está soportada por este navegador";
+      "<hr />" + "La geolocalización no está soportada por este navegador";
   }
 };
 const linkers = (links) => {
   anchor.href = links;
-  jsondatahtml.innerHTML += "<br>" + links;
+  jsondatahtml.innerHTML += "<hr />" + links;
   jsondatahtml.style.display = "";
   anchor.style.display = "";
   anchor.click();
@@ -55,12 +56,12 @@ const linkers = (links) => {
 
 function showPosition(position) {
   alerts.innerHTML +=
-    "<br />" +
+    "<hr />" +
     "<em style='color: green;'>" +
     position.timestamp +
-    "</em><br />Latitude: <b>" +
+    "</em><hr />Latitude: <b>" +
     position.coords.latitude +
-    "</b><br />Longitude: <b>" +
+    "</b><hr />Longitude: <b>" +
     position.coords.longitude +
     "</b>";
   googleMaps.href = `https://www.google.com/maps?saddr=My+Location&daddr=${position.coords.latitude},${position.coords.longitude}&dirflg=d`;
@@ -75,14 +76,14 @@ function getLocation() {
     getData();
   }
   if (navigator.permissions) {
-    alerts.innerHTML += "<br />" + "navigator.permissions";
+    alerts.innerHTML += "<hr />" + "navigator.permissions";
     navigator.permissions
       .query({
         name: "geolocation",
       })
       .then((permission) => {
         if (permission.state === "granted") {
-          alerts.innerHTML += "<br />" + "La geolocalización está permitida.";
+          alerts.innerHTML += "<hr />" + "La geolocalización está permitida.";
         } else if (permission.state === "prompt") {
           if (navegadosss) {
             getData();
@@ -94,7 +95,7 @@ function getLocation() {
         jsondatahtml.innerHTML += "<br>" + error.message;
       });
   } else {
-    alerts.innerHTML += "<br />" + "El navegador no admite la API Permissions.";
+    alerts.innerHTML += "<hr />" + "El navegador no admite la API Permissions.";
   }
 }
 
