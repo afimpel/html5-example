@@ -76,6 +76,7 @@ function getLocation() {
     getData();
   }
   if (navigator.permissions) {
+    console.log("navigator.permissions :>> ", navigator.permissions);
     alerts.innerHTML += "<hr />" + "navigator.permissions";
     navigator.permissions
       .query({
@@ -100,12 +101,6 @@ function getLocation() {
 }
 
 window.onload = function () {
-  console.log(
-    "window :>> ",
-    window.SecurityPolicyViolationEvent((e) => {
-      console.log("e :>> ", e);
-    })
-  );
   getLocation();
   btn.addEventListener("click", getLocation);
 };
