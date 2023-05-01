@@ -7,12 +7,19 @@ function getUSB() {
   alerts.innerHTML = new Date() + "<hr />";
   jsondatahtml.innerHTML = new Date();
   jsondatahtml.style.display = "";
-  navigator.usb.getDevices().then((devices) => {
-    devices.forEach((device) => {
-      alerts.innerHTML += device.productName + "<br />"; // "Arduino Micro"
-      alerts.innerHTML += device.manufacturerName + "<hr />"; // "Arduino LLC"
+  navigator.usb
+    .requestDevice({ filters: [] })
+    .then((devices) => {
+      devices.forEach((device) => {
+        alerts.innerHTML += device.productName + "<br />"; // "Arduino Micro"
+        alerts.innerHTML += device.manufacturerName + "<hr />"; // "Arduino LLC"
+      });
+    })
+    .catch((error) => {
+      jsondatahtml.innerHTML += error.message;
+      jsondatahtml.style.color = "red";
+      console.error(error);
     });
-  });
 }
 
 window.onload = function () {
