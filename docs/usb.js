@@ -3,6 +3,7 @@ const agents = document.getElementById("agents");
 const jsondatahtml = document.getElementById("jsondatahtml");
 
 function getUSB() {
+  alerts.innerHTML = new Date() + "<hr />";
   navigator.usb
     .requestDevice({ filters: [] })
     .then((device) => {
