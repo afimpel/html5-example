@@ -30,7 +30,7 @@ const allusb = async (d) => {
         "" + `Total devices: <b>${devices.length}</b>` + "<hr />"; // "Arduino LLC"
       console.log(`Total devices: ${devices.length}`);
       devices.forEach((device) => {
-        jsonlisthtml.innerHTML += "<ul>"+newDevice(device) + "</ul>"; // "Arduino LLC"
+        jsonlisthtml.innerHTML += "<li>" + newDevice(device) + "</li>"; // "Arduino LLC"
       });
     })
     .catch((error) => {
