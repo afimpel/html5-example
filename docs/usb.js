@@ -11,10 +11,7 @@ function getUSB() {
     .requestDevice({ filters: [] })
     .then((devices) => {
       console.log("devices :>> ", devices);
-      /*devices.forEach((device) => {
-        alerts.innerHTML += device.productName + "<br />"; // "Arduino Micro"
-        alerts.innerHTML += device.manufacturerName + "<hr />"; // "Arduino LLC"
-      });*/
+      alerts.innerHTML += JSON.stringify(devices) + "<hr />"; // "Arduino LLC"
     })
     .catch((error) => {
       const button = document.createElement("button");
