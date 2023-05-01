@@ -18,8 +18,8 @@ function getUSB() {
     });
 }
 
-const allusb = (d) => {
-  navigator.usb
+const allusb = async (d) => {
+  return await navigator.usb
     .getDevices()
     .then((devices) => {
       jsondatahtml.style.color = "green";
