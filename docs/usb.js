@@ -17,7 +17,7 @@ function getUSB() {
       jsondatahtml.style.color = "red";
       console.error(error);
     });
-  alerts.innerHTML += "<hr />";
+    
 }
 
 const allusb = async (d) => {
@@ -53,7 +53,7 @@ window.onload = function () {
   allusb();
 };
 function newDevice(device) {
-  console.log(`device: ${device.productName} >> `, device.getInfo());
+  console.log(`device: ${device.productName} >> `, device);
   console.table(device);
   let output = "";
   output += `manufacturerName: <b>${device.manufacturerName}</b>, `;
