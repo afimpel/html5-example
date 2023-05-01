@@ -27,7 +27,7 @@ const allusb = async (d) => {
     .then((devices) => {
       jsondatahtml.style.color = "green";
       alerts.innerHTML +=
-        "" + `Total devices: <b>${devices.length}</b>` + "<hr />"; // "Arduino LLC"
+        "" + `Total devices: <b>${devices.length}</b>`; // "Arduino LLC"
       console.log(`Total devices: ${devices.length}`);
       devices.forEach((device) => {
         jsonlisthtml.innerHTML += "<li>" + newDevice(device) + "</li>"; // "Arduino LLC"
@@ -45,6 +45,7 @@ window.onload = function () {
   alerts.innerHTML = `${new Date()}<hr />`;
   jsondatahtml.innerHTML = new Date();
   jsondatahtml.style.display = "";
+  jsonlisthtml.innerHTML = "";
   const button = document.createElement("button");
   button.textContent = "Request USB device";
   button.addEventListener("click", getUSB);
@@ -52,7 +53,7 @@ window.onload = function () {
   allusb();
 };
 function newDevice(device) {
-  console.log(`device: ${device.productName} >> `, device);
+  console.log(`device: ${device.productName} >> `, device.getInfo());
   console.table(device);
   let output = "";
   output += `manufacturerName: <b>${device.manufacturerName}</b>, `;
