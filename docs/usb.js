@@ -14,16 +14,16 @@ function getUSB() {
       alerts.innerHTML += JSON.stringify(devices) + "<hr />"; // "Arduino LLC"
     })
     .catch((error) => {
-      const button = document.createElement("button");
-      button.textContent = "Request USB device";
-      button.addEventListener("click", getUSB);
       jsondatahtml.innerHTML += error.message;
       jsondatahtml.style.color = "red";
-      document.body.appendChild(button);
       console.error(error);
     });
 }
 
 window.onload = function () {
+  const button = document.createElement("button");
+  button.textContent = "Request USB device";
+  button.addEventListener("click", getUSB);
+  document.body.appendChild(button);
   getUSB();
 };
