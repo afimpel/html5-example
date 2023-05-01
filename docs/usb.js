@@ -5,13 +5,14 @@ const jsondatahtml = document.getElementById("jsondatahtml");
 function getUSB() {
   agents.innerHTML = navigator.userAgent;
   alerts.innerHTML = new Date() + "<hr />";
-  jsondatahtml.innerHTML = new Date();
+  jsondatahtml.innerHTML = new Date() + "<hr />";
   jsondatahtml.style.display = "";
   navigator.usb
     .requestDevice({ filters: [] })
     .then((devices) => {
       console.log("devices :>> ", devices);
-      alerts.innerHTML += JSON.stringify(devices) + "<hr />"; // "Arduino LLC"
+      alerts.innerHTML += JSON.stringify({ ...devices }) + "<hr />"; // "Arduino LLC"
+      jsondatahtml.style.color = "green";
     })
     .catch((error) => {
       jsondatahtml.innerHTML += error.message;
