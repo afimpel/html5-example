@@ -9,10 +9,10 @@ function getUSB() {
   jsondatahtml.style.display = "";
   navigator.usb
     .requestDevice({ filters: [] })
-    .then((devices) => {
-      console.log("devices :>> ", devices);
+    .then((device) => {
+      console.log("device :>> ", device);
       alerts.innerHTML +=
-        `Product name: ${device.productName}, serial number ${device.serialNumber}` +
+        `Product name: ${device.productName}, serial number: <b>${device.serialNumber}` +
         "<br />"; // "Arduino LLC"
       jsondatahtml.style.color = "green";
     })
@@ -25,10 +25,13 @@ function getUSB() {
 
 const allusb = (d) => {
   navigator.usb.getDevices().then((devices) => {
+    jsondatahtml.innerHTML +=
+      `Total devices: <b>${devices.length}</b>` + "<hr />"; // "Arduino LLC"
     console.log(`Total devices: ${devices.length}`);
     devices.forEach((device) => {
+      console.log("device :>> ", device);
       jsondatahtml.innerHTML +=
-        `Product name: ${device.productName}, serial number ${device.serialNumber}` +
+        `Product name: <b>${device.productName}</b>, serial number: <b>${device.serialNumber}</b>` +
         "<br />"; // "Arduino LLC"
     });
   });
