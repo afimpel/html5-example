@@ -21,10 +21,21 @@ function getUSB() {
     });
 }
 
+const allusb = (d) => {
+  navigator.usb.getDevices().then((devices) => {
+    console.log(`Total devices: ${devices.length}`);
+    devices.forEach((device) => {
+      console.log(
+        `Product name: ${device.productName}, serial number ${device.serialNumber}`
+      );
+    });
+  });
+};
+
 window.onload = function () {
   const button = document.createElement("button");
   button.textContent = "Request USB device";
   button.addEventListener("click", getUSB);
   document.body.appendChild(button);
-  getUSB();
+  allusb();
 };
