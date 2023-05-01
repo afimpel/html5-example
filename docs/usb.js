@@ -3,10 +3,6 @@ const agents = document.getElementById("agents");
 const jsondatahtml = document.getElementById("jsondatahtml");
 
 function getUSB() {
-  agents.innerHTML = navigator.userAgent;
-  alerts.innerHTML = new Date() + "<hr />";
-  jsondatahtml.innerHTML = new Date() + "<hr />";
-  jsondatahtml.style.display = "";
   navigator.usb
     .requestDevice({ filters: [] })
     .then((device) => {
@@ -38,6 +34,10 @@ const allusb = (d) => {
 };
 
 window.onload = function () {
+  agents.innerHTML = navigator.userAgent;
+  alerts.innerHTML = new Date() + "<hr />";
+  jsondatahtml.innerHTML = new Date() + "<hr />";
+  jsondatahtml.style.display = "";
   const button = document.createElement("button");
   button.textContent = "Request USB device";
   button.addEventListener("click", getUSB);
