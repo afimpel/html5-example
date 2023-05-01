@@ -2,7 +2,7 @@ const alerts = document.getElementById("alerts");
 const agents = document.getElementById("agents");
 const jsondatahtml = document.getElementById("jsondatahtml");
 
-function getLocation() {
+function getUSB() {
   agents.innerHTML = navigator.userAgent;
   alerts.innerHTML = new Date() + "<hr />";
   jsondatahtml.innerHTML = new Date();
@@ -16,6 +16,5 @@ function getLocation() {
 }
 
 window.onload = function () {
-  getLocation();
-  btn.addEventListener("click", getLocation);
+  getUSB();
 };
