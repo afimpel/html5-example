@@ -1,16 +1,13 @@
-<html ng-app="UI.example.app" lang="es">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>printer</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css"
-      integrity="sha384-3fdgwJw17Bi87e1QQ4fsLn4rUFqWw//KU0g8TvV6quvahISRewev6/EocKNuJmEw"
-      crossorigin="anonymous"
-    />
+    <title>JavaScript PRINTER API</title>
   </head>
-  <body>
+
+  <body style="font-size: 24px; padding: 1rem">
+    <h1 style="text-align: center; border: 1px solid green; padding: 1rem">
+      JavaScript PRINTER API
+    </h1>
     <pre
       style="border: 1px solid green; padding: 1rem; white-space: pre-wrap"
       id="alerts"
@@ -24,6 +21,7 @@
       var device;
 
       function setup(device) {
+        alerts.innerHTML += newDevice(device); // "Arduino LLC"
         return device
           .open()
           .then(() => device.selectConfiguration(1))
@@ -40,12 +38,13 @@
       }
 
       function connectAndPrint() {
+        alerts.innerHTML = "";
         if (device == null) {
           navigator.usb
-            .requestDevice()
+            .requestDevice({ filters: [] })
             .then((selectedDevice) => {
               device = selectedDevice;
-              alerts.innerHTML = newDevice(device); // "Arduino LLC"
+              alerts.innerHTML += newDevice(device); // "Arduino LLC"
               console.log(device);
               return setup(device);
             })
@@ -61,6 +60,7 @@
         .then((devices) => {
           if (devices.length > 0) {
             device = devices[0];
+            alerts.innerHTML += newDevice(device); // "Arduino LLC"
             return setup(device);
           }
         })
