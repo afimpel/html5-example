@@ -17,7 +17,6 @@ function getUSB() {
       jsondatahtml.style.color = "red";
       console.error(error);
     });
-    
 }
 
 const allusb = async (d) => {
@@ -26,8 +25,7 @@ const allusb = async (d) => {
     .getDevices()
     .then((devices) => {
       jsondatahtml.style.color = "green";
-      alerts.innerHTML +=
-        "" + `Total devices: <b>${devices.length}</b>`; // "Arduino LLC"
+      alerts.innerHTML += "" + `Total devices: <b>${devices.length}</b>`; // "Arduino LLC"
       console.log(`Total devices: ${devices.length}`);
       devices.forEach((device) => {
         jsonlisthtml.innerHTML += "<li>" + newDevice(device) + "</li>"; // "Arduino LLC"

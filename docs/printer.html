@@ -1,0 +1,84 @@
+<html ng-app="UI.example.app" lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>printer</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css"
+      integrity="sha384-3fdgwJw17Bi87e1QQ4fsLn4rUFqWw//KU0g8TvV6quvahISRewev6/EocKNuJmEw"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <pre
+      style="border: 1px solid green; padding: 1rem; white-space: pre-wrap"
+      id="alerts"
+    ></pre>
+    <textarea id="printContent"></textarea>
+    <input type="submit" onclick="connectAndPrint()" value="Print" />
+
+    <p>Type text into box and click on submit button.</p>
+    <script>
+      const alerts = document.getElementById("alerts");
+      var device;
+
+      function setup(device) {
+        return device
+          .open()
+          .then(() => device.selectConfiguration(1))
+          .then(() => device.claimInterface(0));
+      }
+
+      function print() {
+        var string = document.getElementById("printContent").value + "\n";
+        var encoder = new TextEncoder();
+        var data = encoder.encode(string);
+        device.transferOut(1, data).catch((error) => {
+          console.log(error);
+        });
+      }
+
+      function connectAndPrint() {
+        if (device == null) {
+          navigator.usb
+            .requestDevice()
+            .then((selectedDevice) => {
+              device = selectedDevice;
+              alerts.innerHTML = newDevice(device); // "Arduino LLC"
+              console.log(device);
+              return setup(device);
+            })
+            .then(() => print())
+            .catch((error) => {
+              console.log(error);
+            });
+        } else print();
+      }
+
+      navigator.usb
+        .getDevices()
+        .then((devices) => {
+          if (devices.length > 0) {
+            device = devices[0];
+            return setup(device);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      function newDevice(device) {
+        console.log(`device: ${device.productName} >> `, device);
+        console.table(device);
+        let output = "";
+        output += `manufacturerName: <b>${device.manufacturerName}</b>, `;
+        output += `productName: <b>${device.productName}</b>, `;
+        output += `serialNumber: <b>${device.serialNumber}</b>, `;
+        output += `vendorId: <b>${device.vendorId}</b>, `;
+        output += `productId: <b>${device.productId}</b>.`;
+        return output;
+      }
+    </script>
+  </body>
+</html>
