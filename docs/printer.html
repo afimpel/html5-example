@@ -13,12 +13,12 @@
       id="alerts"
     ></pre>
     <textarea id="printContent"></textarea>
-    <input type="submit" onclick="connectAndPrint()" value="Print" />
+    <input type="submit" onclick="connectAndPrint(this)" value="Print" />
 
     <p>Type text into box and click on submit button.</p>
     <script>
       const alerts = document.getElementById("alerts");
-      var device;
+      let device;
 
       function setup(device) {
         alerts.innerHTML = newDevice(device); // "Arduino LLC"
@@ -29,9 +29,9 @@
       }
 
       function print() {
-        var string = document.getElementById("printContent").value + "\n";
-        var encoder = new TextEncoder();
-        var data = encoder.encode(string);
+        let string = document.getElementById("printContent").value + "\n";
+        let encoder = new TextEncoder();
+        let data = encoder.encode(string);
         alerts.innerHTML = newDevice(device); // "Arduino LLC"
         device
           .transferOut(1, data)
@@ -43,7 +43,8 @@
           });
       }
 
-      function connectAndPrint() {
+      function connectAndPrint(parms) {
+        console.log("parms :>> ", parms);
         alerts.innerHTML = "";
         if (device == null) {
           navigator.usb
