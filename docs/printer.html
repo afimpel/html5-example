@@ -28,16 +28,19 @@
             return device.open(); // Abre la conexión al dispositivo
           })
           .then((handle) => {
+            console.log("then0 :>> ", handle);
             console.log(
               `Conexión establecida con el dispositivo: ${handle.productName}`
             );
             return handle.selectConfiguration(1); // Selecciona la configuración
           })
-          .then(() => {
+          .then((handle) => {
+            console.log("then1 :>> ", handle);
             console.log("Configuración seleccionada");
             return handle.claimInterface(0); // Reclama la interfaz
           })
-          .then(() => {
+          .then((handle) => {
+            console.log("then2 :>> ", handle);
             console.log("Interfaz reclamada");
             const text =
               '\x1B%-12345X@PJL JOB\n@PJL RDYMSG DISPLAY="Imprimiendo desde WebUSB"\nThis is a test print from WebUSB.\n\x1B%-12345X@PJL EOJ\n';
@@ -45,7 +48,8 @@
             const data = encoder.encode(text); // Codifica el texto en bytes
             return handle.transferOut(1, data); // Envía los datos al dispositivo
           })
-          .then(() => {
+          .then((handle) => {
+            console.log("then3 :>> ", handle);
             console.log("Datos enviados al dispositivo");
           })
           .catch((error) => {
