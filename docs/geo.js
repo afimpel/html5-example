@@ -21,7 +21,7 @@ const getData = async () => {
           linkers("App-Prefs:Privacy&path=LOCATION");
         } else if (navigator.userAgent.match(/(Android)/)) {
           linkers(
-            "App-Prefs:root=LOCATION_SERVICES"
+            "intent:#Intent;action=android.settings.LOCATION_SOURCE_SETTINGS;end"
           );
         } else if (navigator.userAgent.match(/(Chrome)/)) {
           linkers("chrome://settings/content");
