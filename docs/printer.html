@@ -23,13 +23,11 @@
         navigator.usb
           .requestDevice({ filters: [{ vendorId: 1008, productId: 22039 }] })
           .then((device) => {
-            console.log(`Dispositivo seleccionado: ${device.productName}`);
+            console.log("device :>> ", device);
             return device.open(); // Abre la conexión al dispositivo
           })
           .then((handle) => {
-            console.log(
-              `Conexión establecida con el dispositivo: ${handle}`
-            );
+            console.log("handle :>> ", handle);
             return handle.selectConfiguration(1); // Selecciona la configuración
           })
           .then(() => {
