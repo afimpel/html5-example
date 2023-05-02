@@ -51,7 +51,7 @@ const linkers = (links) => {
   jsondatahtml.innerHTML += "<hr />" + links;
   jsondatahtml.style.display = "";
   anchor.style.display = "";
-  anchor.click();
+  //anchor.click();
 //  window.location = links;
 };
 
