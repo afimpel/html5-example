@@ -24,25 +24,25 @@
           .requestDevice({ filters: [{ vendorId: 1008, productId: 22039 }] })
           .then((device) => {
             console.log("device :>> ", device);
-            return device.open(); // Abre la conexión al dispositivo
-          })
-          .then((handle) => {
-            console.log("handle :>> ", handle);
-            return handle.selectConfiguration(1); // Selecciona la configuración
-          })
-          .then(() => {
-            console.log("Configuración seleccionada");
-            return handle.claimInterface(0); // Reclama la interfaz
-          })
-          .then(() => {
-            console.log("Interfaz reclamada");
-            const text = "Hola, esto es una prueba de impresión";
-            const encoder = new TextEncoder();
-            const data = encoder.encode(text); // Codifica el texto en bytes
-            return handle.transferOut(1, data); // Envía los datos al dispositivo
-          })
-          .then(() => {
-            console.log("Datos enviados al dispositivo");
+            return device.open().then((handle) => {
+              console.log("handle :>> ", handle);
+              return handle.selectConfiguration(1).then(() => {
+                console.log("Configuración seleccionada");
+                return handle
+                  .claimInterface(0)
+                  .then(() => {
+                    console.log("Interfaz reclamada");
+                    const text = "Hola, esto es una prueba de impresión";
+                    const encoder = new TextEncoder();
+                    const data = encoder.encode(text); // Codifica el texto en bytes
+                    return handle.transferOut(1, data); // Envía los datos al dispositivo
+                  })
+                  .then(() => {
+                    console.log("Datos enviados al dispositivo");
+                  }); // Reclama la interfaz
+              }); // Selecciona la configuración
+            });
+            // Abre la conexión al dispositivo
           })
           .catch((error) => {
             console.error(`Error: ${error}`);
