@@ -17,74 +17,38 @@
 
     <p>Type text into box and click on submit button.</p>
     <script>
-      const alerts = document.getElementById("alerts");
-      let device;
-
-      function setup(device) {
-        alerts.innerHTML = newDevice(device); // "Arduino LLC"
-        return device
-          .open()
-          .then(() => device.selectConfiguration(1))
-          .then(() => device.claimInterface(0));
-      }
-
-      function print() {
-        let string = document.getElementById("printContent").value + "\n";
-        let encoder = new TextEncoder();
-        let data = encoder.encode(string);
-        alerts.innerHTML = newDevice(device) + "<br />" + data; // "Arduino LLC"
-        device
-          .transferOut(1, data)
-          .then((then) => {
-            console.log("then :>> ", then);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
-
       function connectAndPrint(parms) {
         console.log("parms :>> ", parms);
-        alerts.innerHTML = "";
-        if (device == null) {
-          navigator.usb
-            .requestDevice({ filters: [{ vendorId: 1008 }] })
-            .then((selectedDevice) => {
-              device = selectedDevice;
-              alerts.innerHTML = newDevice(device); // "Arduino LLC"
-              console.log(device);
-              return setup(device);
-            })
-            .then(() => print())
-            .catch((error) => {
-              console.error(error);
-            });
-        } else print();
-      }
-
-      navigator.usb
-        .getDevices()
-        .then((devices) => {
-          if (devices.length > 0) {
-            device = devices[0];
-            alerts.innerHTML = newDevice(device); // "Arduino LLC"
-            return setup(device);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-
-      function newDevice(deviceOBJ) {
-        console.log(`deviceOBJ: ${deviceOBJ.productName} >> `, deviceOBJ);
-        console.table(deviceOBJ);
-        let output = "";
-        output += `manufacturerName: <b>${deviceOBJ.manufacturerName}</b>, `;
-        output += `productName: <b>${deviceOBJ.productName}</b>, `;
-        output += `serialNumber: <b>${deviceOBJ.serialNumber}</b>, `;
-        output += `vendorId: <b>${deviceOBJ.vendorId}</b>, `;
-        output += `productId: <b>${deviceOBJ.productId}</b>.`;
-        return output;
+        // Selecciona la impresora USB
+        navigator.usb
+          .requestDevice({ filters: [{ vendorId: 1008, productId: 22039 }] })
+          .then((device) => {
+            console.log(`Dispositivo seleccionado: ${device.productName}`);
+            return device.open(); // Abre la conexión al dispositivo
+          })
+          .then((handle) => {
+            console.log(
+              `Conexión establecida con el dispositivo: ${handle.productName}`
+            );
+            return handle.selectConfiguration(1); // Selecciona la configuración
+          })
+          .then(() => {
+            console.log("Configuración seleccionada");
+            return handle.claimInterface(0); // Reclama la interfaz
+          })
+          .then(() => {
+            console.log("Interfaz reclamada");
+            const text = "Hola, esto es una prueba de impresión";
+            const encoder = new TextEncoder();
+            const data = encoder.encode(text); // Codifica el texto en bytes
+            return handle.transferOut(1, data); // Envía los datos al dispositivo
+          })
+          .then(() => {
+            console.log("Datos enviados al dispositivo");
+          })
+          .catch((error) => {
+            console.error(`Error: ${error}`);
+          });
       }
     </script>
   </body>
