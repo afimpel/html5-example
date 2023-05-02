@@ -42,7 +42,7 @@
         alerts.innerHTML = "";
         if (device == null) {
           navigator.usb
-            .requestDevice({ filters: [] })
+            .requestDevice({ filters: [{ vendorId: 1008 }] })
             .then((selectedDevice) => {
               device = selectedDevice;
               alerts.innerHTML = newDevice(device); // "Arduino LLC"
@@ -69,15 +69,15 @@
           console.error(error);
         });
 
-      function newDevice(device) {
-        console.log(`device: ${device.productName} >> `, device);
-        console.table(device);
+      function newDevice(deviceOBJ) {
+        console.log(`deviceOBJ: ${deviceOBJ.productName} >> `, deviceOBJ);
+        console.table(deviceOBJ);
         let output = "";
-        output += `manufacturerName: <b>${device.manufacturerName}</b>, `;
-        output += `productName: <b>${device.productName}</b>, `;
-        output += `serialNumber: <b>${device.serialNumber}</b>, `;
-        output += `vendorId: <b>${device.vendorId}</b>, `;
-        output += `productId: <b>${device.productId}</b>.`;
+        output += `manufacturerName: <b>${deviceOBJ.manufacturerName}</b>, `;
+        output += `productName: <b>${deviceOBJ.productName}</b>, `;
+        output += `serialNumber: <b>${deviceOBJ.serialNumber}</b>, `;
+        output += `vendorId: <b>${deviceOBJ.vendorId}</b>, `;
+        output += `productId: <b>${deviceOBJ.productId}</b>.`;
         return output;
       }
     </script>
