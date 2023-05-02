@@ -32,7 +32,7 @@
         let string = document.getElementById("printContent").value + "\n";
         let encoder = new TextEncoder();
         let data = encoder.encode(string);
-        alerts.innerHTML = newDevice(device); // "Arduino LLC"
+        alerts.innerHTML = newDevice(device) + "<br />" + data; // "Arduino LLC"
         device
           .transferOut(1, data)
           .then((then) => {
