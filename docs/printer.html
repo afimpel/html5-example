@@ -33,9 +33,14 @@
         var encoder = new TextEncoder();
         var data = encoder.encode(string);
         alerts.innerHTML = newDevice(device); // "Arduino LLC"
-        device.transferOut(1, data).catch((error) => {
-          console.error(error);
-        });
+        device
+          .transferOut(1, data)
+          .then((then) => {
+            console.log("then :>> ", then);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
 
       function connectAndPrint() {
