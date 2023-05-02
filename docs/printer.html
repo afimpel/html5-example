@@ -33,7 +33,7 @@
         var encoder = new TextEncoder();
         var data = encoder.encode(string);
         device.transferOut(1, data).catch((error) => {
-          console.log(error);
+          console.error(error);
         });
       }
 
@@ -50,7 +50,7 @@
             })
             .then(() => print())
             .catch((error) => {
-              console.log(error);
+              console.error(error);
             });
         } else print();
       }
@@ -65,7 +65,7 @@
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
 
       function newDevice(device) {
