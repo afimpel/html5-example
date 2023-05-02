@@ -28,7 +28,7 @@
           })
           .then((handle) => {
             console.log(
-              `Conexión establecida con el dispositivo: ${handle.productName}`
+              `Conexión establecida con el dispositivo: ${handle}`
             );
             return handle.selectConfiguration(1); // Selecciona la configuración
           })
