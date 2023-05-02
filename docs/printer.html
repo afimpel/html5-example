@@ -21,7 +21,7 @@
       var device;
 
       function setup(device) {
-        alerts.innerHTML += newDevice(device); // "Arduino LLC"
+        alerts.innerHTML = newDevice(device); // "Arduino LLC"
         return device
           .open()
           .then(() => device.selectConfiguration(1))
@@ -32,6 +32,7 @@
         var string = document.getElementById("printContent").value + "\n";
         var encoder = new TextEncoder();
         var data = encoder.encode(string);
+        alerts.innerHTML = newDevice(device); // "Arduino LLC"
         device.transferOut(1, data).catch((error) => {
           console.error(error);
         });
@@ -44,7 +45,7 @@
             .requestDevice({ filters: [] })
             .then((selectedDevice) => {
               device = selectedDevice;
-              alerts.innerHTML += newDevice(device); // "Arduino LLC"
+              alerts.innerHTML = newDevice(device); // "Arduino LLC"
               console.log(device);
               return setup(device);
             })
@@ -60,7 +61,7 @@
         .then((devices) => {
           if (devices.length > 0) {
             device = devices[0];
-            alerts.innerHTML += newDevice(device); // "Arduino LLC"
+            alerts.innerHTML = newDevice(device); // "Arduino LLC"
             return setup(device);
           }
         })
